@@ -29,7 +29,7 @@ to_x = 0
 to_y = 0
 
 # 이동 속도
-character_speed = 0.6
+character_speed = 1
 
 # 폰트 정의
 game_font = pygame.font.Font(None, 40)  # 폰트 객체 생성 (폰트, 크기)
