@@ -29,7 +29,8 @@ to_x = 0
 to_y = 0
 
 # 이동 속도
-character_speed = 1
+character_speed = 1 # 1이 가장 부드러움
+
 
 # 폰트 정의
 game_font = pygame.font.Font(None, 40)  # 폰트 객체 생성 (폰트, 크기)
@@ -84,3 +85,5 @@ pygame.time.delay(2000)  # 2초 정도 대기 (ms)
 
 # pygame 종료
 pygame.quit()
+
+print("2022 project")
