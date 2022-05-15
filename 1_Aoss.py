@@ -8,6 +8,7 @@ import os
 # 3. 같은 이미지 리스트 화면 랜덤 출력
 ##################################
 pygame.init()
+# conect test
 
 screen_width = 1200
 screen_height = 800
