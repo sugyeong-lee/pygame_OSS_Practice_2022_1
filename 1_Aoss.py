@@ -1,5 +1,11 @@
 import pygame
 import random
+
+
+asddfghj
+asdfghjk
+asdfghjkl
+
 ###############################################
 # 기본 초기화
 pygame.init()  # 초기화 (반드시 필요)
