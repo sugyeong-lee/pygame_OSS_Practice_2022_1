@@ -6,6 +6,15 @@ asddfghj
 asdfghjk
 asdfghjkl
 
+if random_teacher > y_pos_teacher:
+        y_pos_teacher += 3
+    elif random_teacher < y_pos_teacher:
+        y_pos_teacher -= 3
+    else:
+        random_teacher = random.randrange(
+            0, size_bg_width - size_teacher_width)
+
+
 ###############################################
 # 기본 초기화
 pygame.init()  # 초기화 (반드시 필요)
