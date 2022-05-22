@@ -1,10 +1,7 @@
 import pygame
 import random
 
-
-asddfghj
-asdfghjk
-asdfghjkl
+# 객체 간단하게 
 
 if random_teacher > y_pos_teacher:
         y_pos_teacher += 3
