@@ -132,4 +132,4 @@ N_it3.x_pos, N_it3.y_pos = 1300, random.randint(0, screen_height - N_item3_heigh
 N_it3.speed = 5
 
 
-객체화 + 
+객체화 + 랜덤 수정 + 
