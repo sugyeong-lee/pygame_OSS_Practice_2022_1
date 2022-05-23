@@ -2,8 +2,6 @@ import pygame
 
 pygame.init()     # 초기화
 
-
-
 # class 묶기 수정
 
 # 화면 크기 설정
@@ -132,3 +130,6 @@ N_item3 = p_it1.img("C:\\Users\\653dl\\KKLHY\\아이템\\n_it3.png")
 N_item3_width, N_item3_height = N_it3.img_size(N_item3)  # 아이템의 가로, 세로 크기 설정
 N_it3.x_pos, N_it3.y_pos = 1300, random.randint(0, screen_height - N_item3_height)  # 아이템 위치 설정(random)
 N_it3.speed = 5
+
+
+객체화 + 
