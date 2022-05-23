@@ -15,18 +15,19 @@ def drawObject(obj, x, y):   # 게임에 등장하는 객체 드로잉
 
 
 def initGame():
-    global screen, clock, background, character, teacher, ball    # 전역 변수 선언
+    global screen, clock, background, character, shot, teacher, ball    # 전역 변수 선언
     pygame.init()  # 초기화 (반드시 필요)
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("stage3")  # 게임 이름
     background = pygame.image.load("C:\\Users\\653dl\\KKLHY\\0_image\\Yang\\background.png")  # 배경
     character = pygame.image.load("C:\\Users\\653dl\\KKLHY\\0_image\\Yang\\character.png")  # 주인공 캐릭터
+    shot = pygame.image.load("C:\\Users\\653dl\\KKLHY\\0_image\\Yang\\shot.png")  # 주인공 공격
     teacher = pygame.image.load("C:\\Users\\653dl\\KKLHY\\0_image\\Yang\\teacher.png")  # 보스 캐릭터
     ball = pygame.image.load("C:\\Users\\653dl\\KKLHY\\0_image\\Yang\\ball.png")  # 아이템
     clock = pygame.time.Clock() # FPS
 
 def runGame():
-    global screen, clock, background, character, teacher, ball  # 전역 변수 선언
+    global screen, clock, background, character, shot, teacher, ball  # 전역 변수 선언
     
     # 주인공 캐릭터 크기 및 초기 위치
     character_size = character.get_rect().size
@@ -36,6 +37,10 @@ def runGame():
     character_y_pos = (screen_height / 2) - (character_height / 2)
     character_to_x, character_to_y = 0, 0  # 캐릭터 이동 방향
     character_speed = 20   # 캐릭터 이동 속도
+
+    # 총알 좌표 리스트
+    shotXY = []
+
     
     # 보스 캐릭터 크기 및 초기 위치
     teacher_size = teacher.get_rect().size
@@ -67,6 +72,16 @@ def runGame():
                     character_to_y -= character_speed
                 elif event.key == pygame.K_DOWN:
                     character_to_y += character_speed
+                elif event.key == pygame.K_SPACE:
+                    shot_size = shot.get_rect().size
+                    shot_width = shot_size[0]
+                    shot_height = shot_size[1]
+                    shot_x_pos = character_x_pos - character_width
+                    shot_y_pos = character_y_pos + character_height/2
+                    shot_to_x, shot_to_y = 0, 0
+                    shot_x_pos += shot_to_x
+                    shot_y_pos += shot_to_y
+                    shotXY.append([shot_x_pos, shot_y_pos])
             if event.type in [pygame.KEYUP]:  # 방향키를 떼면 멈춤
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     character_to_x = 0
@@ -87,6 +102,20 @@ def runGame():
             character_x_pos = screen_width - character_width
         elif character_y_pos > screen_height - character_height:
             character_y_pos = screen_height - character_height
+        
+        if len(shotXY) != 0:
+            for i, shot_to_xy in enumerate(shotXY):
+                 shot_to_xy[0] -= 10
+                 shotXY[1][i] = shot_to_xy[0]
+                 if shot_to_xy[0] <= 0:
+                    try:
+                        shotXY.remove(shot_to_xy)
+                    except:
+                        pass
+        if len(shotXY) != 0:
+            for shot_to_x, shot_to_y in shotXY:
+                drawObject(shot, shot_x_pos, shot_y_pos)
+
 
         drawObject(teacher, teacher_x_pos, teacher_y_pos)
 
