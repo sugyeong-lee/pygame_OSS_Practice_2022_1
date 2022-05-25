@@ -37,3 +37,29 @@ while running:
     pygame.display.update()
 
 pygame.quit()
+
+
+
+flag = True
+
+# 아이템 설정, 리스트로 초기화
+p_it = [
+    item("아이템/n_it1.png"),
+    item("아이템/p_it2.png"),
+    item("아이템/p_it3.png"),
+    item("아이템/p_it4.png")
+]
+n_it =[
+    item("아이템/n_it1.png"),
+    item("아이템/n_it2.png"),
+    item("아이템/n_it3.png")
+]
+# 아이템객체 위치 초기화
+for i in range(4):
+    p_it[i].setRandomXY_pos()
+    
+for i in range(3):
+    n_it[i].setRandomXY_pos()
+
+
+n_items = []; p_items = []
