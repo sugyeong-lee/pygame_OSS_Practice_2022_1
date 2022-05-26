@@ -3,12 +3,11 @@ import sys
 from time import sleep 
 import random
 
-
 ###############################################
 # 화면 크기 설정
 screen_width = 1200  # 가로크기
 screen_height = 800  # 세로크기
-
+itemImage = ['0_image\\Yang\\ball.png', '0_image\\Yang\\bl_ball.png', '0_image\\Yang\\gr_ball.png', '0_image\\Yang\\or_ball.png']
 def drawObject(obj, x, y):   # 게임에 등장하는 객체 드로잉
     global screen      # 전역 변수 선언
     screen.blit(obj, (x, y))
@@ -41,6 +40,16 @@ def runGame():
     # 총알 좌표 리스트
     shotXY = []
 
+    # 보스 item 랜덤 생성
+    item = pygame.image.load(random.choice(itemImage))
+    itemSize = item.get_rect().size
+    itemWidth = itemSize[0]
+    itemHeight = itemSize[1]
+
+    # item 초기 위치 설정
+    itemX = random.randrange(1200, screen_height - itemHeight)
+    itemY = 0
+    itemSpeed = 2
     
     # 보스 캐릭터 크기 및 초기 위치
     teacher_size = teacher.get_rect().size
@@ -73,14 +82,8 @@ def runGame():
                 elif event.key == pygame.K_DOWN:
                     character_to_y += character_speed
                 elif event.key == pygame.K_SPACE:
-                    shot_size = shot.get_rect().size
-                    shot_width = shot_size[0]
-                    shot_height = shot_size[1]
-                    shot_x_pos = character_x_pos - character_width
+                    shot_x_pos = character_x_pos + character_width
                     shot_y_pos = character_y_pos + character_height/2
-                    shot_to_x, shot_to_y = 0, 0
-                    shot_x_pos += shot_to_x
-                    shot_y_pos += shot_to_y
                     shotXY.append([shot_x_pos, shot_y_pos])
             if event.type in [pygame.KEYUP]:  # 방향키를 떼면 멈춤
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -89,8 +92,28 @@ def runGame():
                     character_to_y = 0
 
         drawObject(background, 0, 0)
-
         drawObject(character, character_x_pos, character_y_pos)
+
+        if len(shotXY) != 0:
+            for i, bxy in enumerate(shotXY):
+                 bxy[0] += 10
+                 shotXY[i][0] = bxy[0]
+                 drawObject(shot, bxy[0], bxy[1])
+                 if bxy[0] >= screen_width:
+                     shotXY.remove(bxy)
+        
+        itemX += itemSpeed  # item이 아래로 움직임
+
+        # 아이템이 바닥으로 떨어진 경우
+        if itemX > screen_width:
+            item = pygame.image.load(random.choice(itemImage))
+            itemSize = item.get_rect().size
+            itemWidth = itemSize[0]
+            itemHeight = itemSize[1]
+            itemX = 0
+            itemY = random.randrange(0, itemHeight - screen_height)
+        drawObject(item, itemX, itemY)
+
         # 3. 주인공 캐릭터 위치 재정의
         character_x_pos += character_to_x
         character_y_pos += character_to_y
@@ -102,20 +125,6 @@ def runGame():
             character_x_pos = screen_width - character_width
         elif character_y_pos > screen_height - character_height:
             character_y_pos = screen_height - character_height
-        
-        if len(shotXY) != 0:
-            for i, shot_to_xy in enumerate(shotXY):
-                 shot_to_xy[0] -= 10
-                 shotXY[1][i] = shot_to_xy[0]
-                 if shot_to_xy[0] <= 0:
-                    try:
-                        shotXY.remove(shot_to_xy)
-                    except:
-                        pass
-        if len(shotXY) != 0:
-            for shot_to_x, shot_to_y in shotXY:
-                drawObject(shot, shot_x_pos, shot_y_pos)
-
 
         drawObject(teacher, teacher_x_pos, teacher_y_pos)
 
