@@ -2,6 +2,8 @@ import pygame
 
 pygame.init()     # 초기화
 
+# 불러오기 모듈? 찾기
+
 # class 묶기 수정
 
 # 화면 크기 설정
