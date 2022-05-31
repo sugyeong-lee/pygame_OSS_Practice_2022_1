@@ -1,6 +1,7 @@
 import pygame
 
 pygame.init()     # 초기화
+# 음향 속도 추가
 
 # 불러오기 모듈? 찾기
 
