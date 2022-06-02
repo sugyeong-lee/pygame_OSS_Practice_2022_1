@@ -1,3 +1,8 @@
+# wp_sound =  pygame.mixer.Sound("C:\\Users\\653dl\\KKLHY\\sound\\shot.wav")
+#                wp_sound.play()
+
+
+
 # 캐릭터에 필요한 설정: 
 
 # 아이템에 :  스피드+이동방향, 랜덤 생성좌표(로직),아이템을 담을 리스트(로직),아이템 젠시간(로직)
